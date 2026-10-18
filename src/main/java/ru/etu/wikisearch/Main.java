@@ -9,6 +9,7 @@ public class Main {
         ConsoleInput input = new ConsoleInput();
         WikipediaApiClient apiClient = new WikipediaApiClient();
         SearchResponseParser parser = new SearchResponseParser();
+        ResultPrinter printer = new ResultPrinter();
 
         try {
             while (true) {
@@ -33,6 +34,12 @@ public class Main {
                     System.err.println("Не удалось разобрать ответ сервера. Попробуйте позже.");
                     continue;
                 }
+
+                printer.print(results);
+                if (results.isEmpty()) {
+                    continue;
+                }
+
             }
 
 
