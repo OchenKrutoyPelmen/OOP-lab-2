@@ -17,7 +17,6 @@ public class ConsoleInput {
                 return null;
             }
             if (!input.isEmpty()) {
-                System.out.println(input);
                 return input;
             }
             System.out.println("Запрос не может быть пустым. Попробуйте снова.");
