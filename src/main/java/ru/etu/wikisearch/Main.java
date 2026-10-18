@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         ConsoleInput input = new ConsoleInput();
         WikipediaApiClient apiClient = new WikipediaApiClient();
+        SearchResponseParser parser = new SearchResponseParser();
 
         try {
             while (true) {
@@ -25,8 +26,13 @@ public class Main {
                     continue;
                 }
 
-
-
+                List<SearchResult> results;
+                try {
+                    results = parser.parse(json);
+                } catch (JsonSyntaxException e) {
+                    System.err.println("Не удалось разобрать ответ сервера. Попробуйте позже.");
+                    continue;
+                }
             }
 
 
