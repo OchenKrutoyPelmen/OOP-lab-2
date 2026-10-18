@@ -10,6 +10,7 @@ public class Main {
         WikipediaApiClient apiClient = new WikipediaApiClient();
         SearchResponseParser parser = new SearchResponseParser();
         ResultPrinter printer = new ResultPrinter();
+        BrowserOpener browserOpener = new BrowserOpener();
 
         try {
             while (true) {
@@ -40,9 +41,22 @@ public class Main {
                     continue;
                 }
 
+                int choice = input.readResultChoice(results.size());
+                if (choice == -1) {
+                    System.out.println("До свидания!");
+                    break;
+                }
+
+                SearchResult selected = results.get(choice - 1);
+                boolean opened = browserOpener.openArticle(selected.getPageId());
+                if (opened) {
+                    System.out.println("Статья \"" + selected.getTitle() + "\" открыта в браузере.");
+                } else {
+                    System.out.println("Не удалось открыть статью. Проверьте настройки системы.");
+                }
+
+                System.out.println();
             }
-
-
         } finally {
             input.close();
         }
